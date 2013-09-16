@@ -1,3 +1,4 @@
+  path = require('path'),
 /*
  * grunt-node-webkit-builder
  * https://github.com/mllrsohn/grunt-node-webkit-builder
