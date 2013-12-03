@@ -226,6 +226,8 @@ module.exports = function(grunt) {
                 info.CFBundleVersion = grunt.config('nodewebkit.options.app.version'); // TODO: if git, get commit hash!
                 info.CFBundleShortVersionString = 'Version ' + grunt.config('nodewebkit.options.app.version');
 
+                if(grunt.config('nodewebkit.options.app.identifier'))
+                  info.CFBundleIdentifier = grunt.config('nodewebkit.options.app.identifier');
 
                 if(grunt.config('nodewebkit.options.app.copyright')) {
                   info.NSHumanReadableCopyright = grunt.config('nodewebkit.options.app.copyright');
