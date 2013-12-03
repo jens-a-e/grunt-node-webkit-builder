@@ -226,20 +226,28 @@ module.exports = function(grunt) {
                 info.CFBundleVersion = grunt.config('nodewebkit.options.app.version'); // TODO: if git, get commit hash!
                 info.CFBundleShortVersionString = 'Version ' + grunt.config('nodewebkit.options.app.version');
 
+
                 if(grunt.config('nodewebkit.options.app.copyright')) {
                   info.NSHumanReadableCopyright = grunt.config('nodewebkit.options.app.copyright');
                 }
-
-                grunt.file.write(
-                  target_filename,
-                  plist.build(info)
-                );
 
                 // Copy the Credits.html
                 var credits = path.resolve(grunt.config('nodewebkit.src').replace(/\*.*/,''),'Credits.html');
                 if (grunt.file.exists(credits)){
                   grunt.file.copy(credits, path.resolve(path.dirname(target_filename),'Resources','Credits.html'));
                 }
+
+                // Copy the App.icns and replace it in the Info.plist, if it exists
+                var appIcon = path.resolve(grunt.config('nodewebkit.src').replace(/\*.*/,''),'App.icns');
+                if (grunt.file.exists(appIcon)){
+                  grunt.file.copy(appIcon, path.resolve(path.dirname(target_filename),'Resources','App.icns'));
+                  info.CFBundleIconFile = 'App.icns';
+                }
+
+                grunt.file.write(
+                  target_filename,
+                  plist.build(info)
+                );
               }
 
               fs.chmodSync(target_filename, stats.mode);
