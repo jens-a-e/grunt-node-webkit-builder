@@ -70,6 +70,7 @@ module.exports = function(grunt) {
   grunt.config.requires("nodewebkit.src");
   grunt.config.requires("nodewebkit.options");
   grunt.config.requires("nodewebkit.options.app.name");
+  grunt.config.requires("nodewebkit.options.app.appName");
   grunt.config.requires("nodewebkit.options.app.version");
 
   // console.log(grunt.config.get());
@@ -86,7 +87,7 @@ module.exports = function(grunt) {
         download = require('./lib/download')(grunt);
 
 
-    var appName = grunt.config('nodewebkit.options.app.name');
+    var appName = grunt.config('nodewebkit.options.app.appName');
 
     var self = this,
       done = this.async(), // This is async so make sure we initalize done
